@@ -16,14 +16,17 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3
 
-    - name: Set up JDK 11 (Temurin)
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
+    - name: Install JDK 11 (Temurin)
+      run: |
+        choco install openjdk11 -y
+        $env:JAVA_HOME="C:\Program Files\AdoptOpenJDK\jdk-11.0.12.7-hotspot"
+        $env:PATH="$env:JAVA_HOME\bin;$env:PATH"
 
     - name: Build with Maven
       run: mvn clean install
 
     - name: Run tests with Maven
       run: mvn test
+
+    - name: Print Maven Version
+      run: mvn --version
