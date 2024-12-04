@@ -24,7 +24,7 @@ jobs:
 
     - name: Download Secure File
       env:
-        API_TOKEN: ${{ secrets.SECURE_API_TOKEN }}  # Store your API token in GitHub Secrets
+        API_TOKEN: ${{ secrets.UMB_SECRETCODE }}
       run: |
         $url = "https://example.com/secure-file.zip"  # Replace with your secure file URL
         $headers = @{
