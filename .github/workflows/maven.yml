@@ -22,6 +22,17 @@ jobs:
         $env:JAVA_HOME="C:\Program Files\AdoptOpenJDK\jdk-11.0.12.7-hotspot"
         $env:PATH="$env:JAVA_HOME\bin;$env:PATH"
 
+    - name: Download Secure File
+      env:
+        API_TOKEN: ${{ secrets.SECURE_API_TOKEN }}  # Store your API token in GitHub Secrets
+      run: |
+        $url = "https://example.com/secure-file.zip"  # Replace with your secure file URL
+        $headers = @{
+          "Authorization" = "Bearer $env:API_TOKEN"
+        }
+        $outputPath = "C:\path\to\your\desired\directory\secure-file.zip"
+        Invoke-WebRequest -Uri $url -Headers $headers -OutFile $outputPath
+
     - name: Build with Maven
       run: mvn clean install
 
