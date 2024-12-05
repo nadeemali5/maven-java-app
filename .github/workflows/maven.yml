@@ -1,4 +1,4 @@
-name: Calling Maven Pipeline module.
+name: Calling Maven Pipeline module..
 
 on:
   push:
