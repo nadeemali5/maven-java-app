@@ -1,35 +1,12 @@
-
-# below is the running maven yml
-
-name: Java CI with Maven
+name: Calling Maven Pipeline module.
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  build:
-    runs-on: windows-latest
-
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v3
-
-    - name: Install JDK 11 (Temurin)
-      run: |
-        choco install openjdk11 -y
-        $env:JAVA_HOME="C:\Program Files\AdoptOpenJDK\jdk-11.0.12.7-hotspot"
-        $env:PATH="$env:JAVA_HOME\bin;$env:PATH"
-
-    - name: Build with Maven
-      run: mvn clean install
-
-    - name: Run tests with Maven
-      run: mvn test
-
-    - name: Print Maven Version
-      run: mvn --version
+  call-task-pipeline:
+    uses: nadeemali5/Called_Workflow_Module/.github/workflows/maven.yml@main  # Reusable workflow call
+    with:
+      branch_or_tag: ${{ github.ref_name }}
